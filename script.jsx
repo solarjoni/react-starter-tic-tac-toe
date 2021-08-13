@@ -11,7 +11,7 @@ class Square extends React.Component {
       <button 
         className="square"
         onClick={ () => { 
-          console.log(this.state.msg);
+          console.log(this.state);
           this.setState({ value: 'X'});
           this.setState({ msg: 'already clicked'});
           }
