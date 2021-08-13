@@ -20,7 +20,7 @@ class Board extends React.Component {
     const squares = this.state.squares.slice();
     const msg = this.state.msg.slice();
     if (calculateWinner(squares)) {
-      console.log(squares[i])
+      console.log('Winner is :', calculateWinner(squares))
       return;
     }
     if (squares[i]) {
