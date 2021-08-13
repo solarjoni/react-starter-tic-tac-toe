@@ -1,31 +1,49 @@
 class Square extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-      msg:'click',
-    };
-  }
   render() {
     return (
       <button 
         className="square"
-        onClick={ () => { 
-          console.log(this.state);
-          this.setState({ value: 'X'});
-          this.setState({ msg: 'already clicked'});
+        onClick={ () => {
+          this.props.onClick();
+          
           }
         }
       >
-        {this.state.value}
+        { this.props.value }
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      msg: Array(9).fill('click'),
+    };
+  }
+  
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    const msg = this.state.msg.slice();
+
+    squares[i] = 'X';
+    msg[i] = 'already clicked';
+    this.setState({ squares: squares, msg: msg });
+    console.log(this.state.msg[i]);
+  }
+  
   renderSquare(i) {
-    return <Square value={i}/>;
+    return (
+      <Square 
+      value={ this.state.squares[i] }
+      onClick={ () => { 
+        this.handleClick(i);
+        } 
+      }
+      />
+    );
   }
 
   render() {
